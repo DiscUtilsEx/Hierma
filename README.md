@@ -4,6 +4,8 @@ Created by Kugee (RazorBack95)
 
 Retreived from https://web.archive.org/web/20231004013123/https://razorback95.com/projects/hierma.php
 
+Abandoned, probably will not be further developed.
+
 isosrc contains the files used to make the iso:
  - `bin`: HIERMA scripts and config files (i.e. the core logic). It also contains FreeDOS utilities as well as the tinylinux image/config
  - `doc`: changelog as well as a readme
