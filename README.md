@@ -13,6 +13,7 @@ tinysrc contains the `tinylinux` source code; no apparent modifications from ori
 
 It's unknown how this was built.
 
+[Download the ISO from the releases section.](https://github.com/DiscUtilsEx/Hierma/releases)
 
 Original readme is as follows:
 
