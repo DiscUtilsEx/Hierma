@@ -1,0 +1,28 @@
+tce-load -i compiletc sstrip
+
+cd busybox-1.29.3
+
+patch -Np0 -i ../busybox-1.24.1_tc_depmod.patch
+patch -Np1 -i ../busybox-1.27.1-wget-make-default-timeout-configurable.patch
+patch -Np1 -i ../busybox-1.29.3_root_path.patch
+patch -Np1 -i ../busybox-1.29.3_vi_search.patch
+
+cp busybox-1.29.3_config.suid .config
+
+make oldconfig
+
+make CC="gcc -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe" CXX="g++ -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe -fno-exceptions -fno-rtti"
+
+mkdir /tmp/pkg
+
+sudo make CC="gcc -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe" CXX="g++ -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe -fno-exceptions -fno-rtti" CONFIG_PREFIX=/tmp/pkg install
+
+sudo mv /tmp/pkg/bin/busybox /tmp/pkg/bin/busybox.suid
+
+make your busybox binary setuid root
+
+cp busybox-1.25.1_config.nosuid .config
+
+make CC="gcc -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe" CXX="g++ -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe -fno-exceptions -fno-rtti"
+
+sudo make CC="gcc -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe" CXX="g++ -flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe -fno-exceptions -fno-rtti" CONFIG_PREFIX=/tmp/pkg install
